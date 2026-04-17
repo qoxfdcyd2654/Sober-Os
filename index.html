@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoberOS Pro v3.0 | Setup Edition</title>
+    <title>SoberOS Pro v3.0 | Timate & BrToSb Edition</title>
     <style>
         * {
             margin: 0;
@@ -219,8 +219,14 @@
         .window-content {
             flex: 1;
             overflow: auto;
-            padding: 15px;
+            padding: 0;
             color: white;
+        }
+        
+        .window-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         /* Панель задач */
@@ -385,6 +391,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 10px;
+            padding: 10px;
         }
 
         .wallpaper-option {
@@ -498,9 +505,13 @@
         </div>
     </div>
     <div class="start-apps">
-        <div class="start-app" onclick="openApp('Браузер', 'https://www.google.com', 'browser')">
-            <img src="https://cdn-icons-png.flaticon.com/512/732/732228.png" alt="browser">
-            <span>Браузер</span>
+        <div class="start-app" onclick="openApp('BrToSb Браузер', 'https://qoxfdcyd2654.github.io/BrToSb/', 'browser')">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="browser">
+            <span>BrToSb Браузер</span>
+        </div>
+        <div class="start-app" onclick="openApp('Timate Мессенджер', 'https://timate.ru', 'browser')">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="timate">
+            <span>Timate Мессенджер</span>
         </div>
         <div class="start-app" onclick="openApp('Калькулятор', 'calculator', 'calc')">
             <img src="https://cdn-icons-png.flaticon.com/512/3665/3665923.png" alt="calc">
@@ -551,32 +562,21 @@
             avatar: selectedAvatar
         };
         
-        // Сохраняем в localStorage
         localStorage.setItem('soberos_user', JSON.stringify(currentUser));
         
-        // Показываем рабочий стол
         document.getElementById('setupOverlay').style.display = 'none';
         document.getElementById('desktop').style.display = 'block';
         document.getElementById('taskbar').style.display = 'flex';
         
-        // Устанавливаем обои
         document.getElementById('desktop').style.backgroundImage = `url('${currentWallpaper}')`;
         
-        // Обновляем информацию пользователя
         document.getElementById('userAvatar').src = currentUser.avatar;
         document.getElementById('userName').textContent = currentUser.name;
         
-        // Показываем приветствие
         showWelcome();
-        
-        // Создаем иконки на рабочем столе
         createDesktopIcons();
-        
-        // Запускаем часы
         updateClock();
         setInterval(updateClock, 1000);
-        
-        // Настройка меню Пуск
         setupStartMenu();
     }
 
@@ -595,10 +595,11 @@
     function createDesktopIcons() {
         const desktop = document.getElementById('desktop');
         const icons = [
-            { name: 'Браузер', icon: 'https://cdn-icons-png.flaticon.com/512/732/732228.png', x: 20, y: 20, action: () => openApp('Браузер', 'https://www.google.com', 'browser') },
-            { name: 'Калькулятор', icon: 'https://cdn-icons-png.flaticon.com/512/3665/3665923.png', x: 20, y: 120, action: () => openApp('Калькулятор', 'calculator', 'calc') },
-            { name: 'Блокнот', icon: 'https://cdn-icons-png.flaticon.com/512/2997/2997923.png', x: 20, y: 220, action: () => openApp('Блокнот', 'notepad', 'notepad') },
-            { name: 'Настройки', icon: 'https://cdn-icons-png.flaticon.com/512/2961/2961925.png', x: 20, y: 320, action: () => openSettings() }
+            { name: 'BrToSb Браузер', icon: 'https://cdn-icons-png.flaticon.com/512/5968/5968705.png', x: 20, y: 20, action: () => openApp('BrToSb Браузер', 'https://qoxfdcyd2654.github.io/BrToSb/', 'browser') },
+            { name: 'Timate', icon: 'https://cdn-icons-png.flaticon.com/512/733/733585.png', x: 20, y: 120, action: () => openApp('Timate Мессенджер', 'https://timate.ru', 'browser') },
+            { name: 'Калькулятор', icon: 'https://cdn-icons-png.flaticon.com/512/3665/3665923.png', x: 20, y: 220, action: () => openApp('Калькулятор', 'calculator', 'calc') },
+            { name: 'Блокнот', icon: 'https://cdn-icons-png.flaticon.com/512/2997/2997923.png', x: 20, y: 320, action: () => openApp('Блокнот', 'notepad', 'notepad') },
+            { name: 'Настройки', icon: 'https://cdn-icons-png.flaticon.com/512/2961/2961925.png', x: 20, y: 420, action: () => openSettings() }
         ];
         
         icons.forEach(icon => {
@@ -640,8 +641,8 @@
         const windowEl = document.createElement('div');
         windowEl.className = 'window';
         windowEl.id = windowId;
-        windowEl.style.width = '500px';
-        windowEl.style.height = '400px';
+        windowEl.style.width = '800px';
+        windowEl.style.height = '600px';
         windowEl.style.left = (50 + openWindows.length * 30) + 'px';
         windowEl.style.top = (50 + openWindows.length * 30) + 'px';
         windowEl.style.zIndex = ++windowZIndex;
@@ -649,10 +650,10 @@
         let contentHtml = '';
         
         if (type === 'browser') {
-            contentHtml = `<iframe src="${content}" style="width:100%; height:100%; border:none;"></iframe>`;
+            contentHtml = `<iframe src="${content}" allow="clipboard-read; clipboard-write; microphone; camera" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"></iframe>`;
         } else if (type === 'calc') {
             contentHtml = `
-                <div style="text-align: center;">
+                <div style="text-align: center; padding: 20px;">
                     <input type="text" id="calc-display-${windowId}" style="width:100%; padding:10px; margin-bottom:10px; font-size:20px; text-align:right; background:#000; color:#fff; border:1px solid #333;" readonly>
                     <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px;">
                         ${['7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'].map(btn => `<button style="padding:15px; background:#333; color:#fff; border:none; cursor:pointer;" onclick="if(this.innerText=='=') document.getElementById('calc-display-${windowId}').value=eval(document.getElementById('calc-display-${windowId}').value); else document.getElementById('calc-display-${windowId}').value+=this.innerText">${btn}</button>`).join('')}
@@ -666,7 +667,7 @@
             `;
         } else if (type === 'files') {
             contentHtml = `
-                <div style="font-family:monospace;">
+                <div style="font-family:monospace; padding: 15px;">
                     <div>📁 Документы</div>
                     <div>📁 Загрузки</div>
                     <div>📁 Изображения</div>
@@ -724,7 +725,7 @@
                 </div>
             </div>
             <div class="window-content">
-                <h3>Выберите обои</h3>
+                <h3 style="padding: 10px;">Выберите обои</h3>
                 <div class="wallpaper-selector">
                     ${wallpapers.map(wp => `
                         <div class="wallpaper-option" onclick="changeWallpaper('${wp.url}')">
@@ -808,7 +809,7 @@
         }
     }
 
-    // Проверяем, установлена ли ОС
+    // Проверяем установку
     const savedUser = localStorage.getItem('soberos_user');
     if (savedUser) {
         currentUser = JSON.parse(savedUser);
