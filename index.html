@@ -533,10 +533,10 @@
             <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="browser">
             <span>BrToSb Браузер</span>
         </div>
-        <div class="start-app" onclick="openApp('Timate Мессенджер', 'https://timate.ru', 'browser')">
-            <img id="timateIcon" src="https://eiqtdlzsupmaaycwvjhp.supabase.co/storage/v1/object/public/SiteConfigs/SiteIcn.bmp" alt="timate" onerror="this.src='https://cdn-icons-png.flaticon.com/512/733/733585.png'">
-            <span>Timate Мессенджер</span>
-        </div>
+<div class="start-app" onclick="openApp('Timate Мессенджер', 'https://timate.ru', 'browser')">
+    <img id="timateIcon" src="https://eiqtdlzsupmaaycwvjhp.supabase.co/storage/v1/object/public/SiteConfigs/SiteIcn.bmp" alt="timate"
+    <span>Timate Мессенджер</span>
+</div>
         <div class="start-app" onclick="openApp('Калькулятор', 'calculator', 'calc')">
             <img src="https://cdn-icons-png.flaticon.com/512/3665/3665923.png" alt="calc">
             <span>Калькулятор</span>
@@ -622,7 +622,7 @@
         const desktop = document.getElementById('desktop');
         const icons = [
             { name: 'BrToSb Браузер', icon: 'https://cdn-icons-png.flaticon.com/512/5968/5968705.png', x: 20, y: 20, action: () => openApp('BrToSb Браузер', 'https://qoxfdcyd2654.github.io/BrToSb/', 'browser') },
-            { name: 'Timate', icon: 'https://eiqtdlzsupmaaycwvjhp.supabase.co/storage/v1/object/public/SiteConfigs/SiteIcn.bmp', x: 20, y: 120, action: () => openApp('Timate Мессенджер', 'https://timate.ru', 'browser'), fallbackIcon: 'https://cdn-icons-png.flaticon.com/512/733/733585.png' },
+            { name: 'Timate', icon: 'https://eiqtdlzsupmaaycwvjhp.supabase.co/storage/v1/object/public/SiteConfigs/SiteIcn.bmp', x: 20, y: 120, action: () => openApp('Timate Мессенджер', 'https://timate.ru', 'browser'), fallbackIcon: 'https://eiqtdlzsupmaaycwvjhp.supabase.co/storage/v1/object/public/SiteConfigs/SiteIcn.bmp' },
             { name: 'Калькулятор', icon: 'https://cdn-icons-png.flaticon.com/512/3665/3665923.png', x: 20, y: 220, action: () => openApp('Калькулятор', 'calculator', 'calc') },
             { name: 'Блокнот', icon: 'https://cdn-icons-png.flaticon.com/512/2997/2997923.png', x: 20, y: 320, action: () => openApp('Блокнот', 'notepad', 'notepad') },
             { name: 'Настройки', icon: 'https://cdn-icons-png.flaticon.com/512/2961/2961925.png', x: 20, y: 420, action: () => openSettings() }
